@@ -1,0 +1,42 @@
+<div class="container">
+
+    <div class="calendar">
+        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" cdkDropList
+            (cdkDropListDropped)="drop($event)" cdkDropListData="dataSource">
+            <ng-container matColumnDef="position" sticky>
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-icon class="example-drag-cursor">reorder</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.date | date: 'shortDate' }}, {{element.date | date:
+                    'shortTime' }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="warn" (click)="deleteAppointment(element.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="editAppointment(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></mat-row>
+        </mat-table>
+    </div>
+    <app-appointment-form [isEdit]="true" [editObject]="editObject"
+        (submitForm)="addAppointment($event)"></app-appointment-form>
+</div>

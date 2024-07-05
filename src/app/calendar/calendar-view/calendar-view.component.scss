@@ -1,0 +1,10 @@
+.container {
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+
+    .calendar {
+        width: 100%;
+    }
+}

@@ -1,0 +1,18 @@
+<div class="form-container">
+    <div class="title">Appointment Form</div>
+    <div class="inner-container">
+        <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="form">
+            <mat-form-field>
+                <input matInput type="text" formControlName="title" placeholder="Title" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choose a date" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button *ngIf="isEdit" mat-raised-button color="primary" type="submit"
+                [disabled]="!appointmentForm.valid">Submit</button>
+            <button *ngIf="!isEdit" mat-raised-button color="primary" type="submit">Edit</button>
+        </form>
+    </div>
+</div>
